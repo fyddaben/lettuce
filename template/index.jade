@@ -1,0 +1,48 @@
+doctype
+
+include ../node_modules/aglio/node_modules/aglio-theme-olio/templates/mixins.jade
+
+html
+    head
+        meta(charset="utf-8")
+        title= self.api.name || 'API Documentation'
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
+        style!= self.css
+        style
+            include ../src/base.css
+    body.preload
+        a.text-muted.back-to-top(href='#top')
+            i.fa.fa-toggle-up
+            | &nbsp;Back to top
+        .container
+        ul#gn-menu.gn-menu-main
+            li.gn-trigger
+                a.gn-icon.gn-icon-menu
+                    span Menu
+                nav.gn-menu-wrapper
+                    .gn-scroller
+                        ul.gn-menu
+                            li.gn-search-item
+                                a.gn-icon
+                                    span  ppt
+                            li
+                                a.gn-icon bbw
+                            li
+                                a.gn-icon Home
+                            li
+                                a.gn-icon Buyest
+                            li
+                                a.gn-icon okyb
+            li
+                a(href='#') API 系统
+            li
+        div(class=self.fullWidth ? 'container-fluid' : 'container')
+            .row
+                block nav
+                    +Nav(false)
+                .content
+                    block content(style='color:red;')
+                        +Content('primary', false)
+        script: include ../src/base.js
+        script: include ../node_modules/aglio/node_modules/aglio-theme-olio/templates/scripts.js
+

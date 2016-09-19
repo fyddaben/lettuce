@@ -1,0 +1,25 @@
+{
+  "name": "lettuce",
+  "version": "0.0.1",
+  "description": "api doc generator",
+  "license": "MIT",
+  "main": "app.js",
+  "repository": "fyddaben/lettuce",
+  "author": {
+    "name": "daben1990",
+    "email": "838730592@qq.com",
+    "url": "https://github.com/fyddaben"
+  },
+  "keywords": [
+    "api blue print",
+    "daben",
+    "mock server"
+  ],
+  "dependencies": {
+    "drakovNew": "0.0.1",
+    "gulp": "^3.9.0",
+    "gulp-aglio": "0.0.10",
+    "node-static":"0.7.8"
+  }
+}
+
