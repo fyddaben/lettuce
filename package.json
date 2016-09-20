@@ -16,7 +16,7 @@
     "mock server"
   ],
   "dependencies": {
-    "drakovNew": "0.0.1",
+    "drakovNew": "0.0.2",
     "gulp": "^3.9.0",
     "gulp-aglio": "0.0.10",
     "node-static":"0.7.8"
