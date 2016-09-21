@@ -1,6 +1,6 @@
 doctype
 
-include ../node_modules/aglio/node_modules/aglio-theme-olio/templates/mixins.jade
+include ./mixins.jade
 
 html
     head
@@ -44,5 +44,5 @@ html
                     block content(style='color:red;')
                         +Content('primary', false)
         script: include ../src/base.js
-        script: include ../node_modules/aglio/node_modules/aglio-theme-olio/templates/scripts.js
+        script: include ./scripts.js
 
