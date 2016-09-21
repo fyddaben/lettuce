@@ -33,9 +33,11 @@ gulp.task('watch', function () {
 gulp.task('default', ['aglio','watch']);
 
 var file = new static.Server('./dist');
-var staticPort = 3001;
-var mockPort = 3000;
+var staticPort = process.env.STATIC_PORT;
+var mockPort = process.env.MOCK_PORT;
+
 require('http').createServer(function (request, response) {
+  console.log('run static server port ' + staticPort);
   request.addListener('end', function () {
     file.serve(request, response);
   }).resume();
@@ -48,7 +50,6 @@ var argv = {
     stealthmode: true
 };
 
-console.log('run static server port ' + staticPort);
 
 drakov.run(argv, function(){
   console.log('run mock server port  ' + mockPort);
