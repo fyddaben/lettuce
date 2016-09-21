@@ -7,9 +7,10 @@ var gulp = require('gulp');
 var aglio = require('gulp-aglio');
 
 var dist_dir = './dist';
+var md_dir = '../share/Cattle/views/*.md';
 
 gulp.task('aglio', function() {
-  gulp.src('./views/*.md')
+  gulp.src(md_dir)
       .pipe(aglio({
         themeTemplate: './template/index.jade',
         themeFullWidth: true,
@@ -27,13 +28,13 @@ gulp.task('reMock', function() {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('./views/*.md', ['aglio', 'reMock']);
+  gulp.watch(md_dir, ['aglio', 'reMock']);
 });
 
 gulp.task('default', ['aglio','watch']);
 
 var file = new static.Server('./dist');
-var staticPort = 8080;
+var staticPort = 3001;
 var mockPort = 3000;
 require('http').createServer(function (request, response) {
   request.addListener('end', function () {
@@ -42,15 +43,15 @@ require('http').createServer(function (request, response) {
 }).listen(staticPort);
 
 var argv = {
-    sourceFiles: './views/*.md',
+    sourceFiles: md_dir,
     serverPort: mockPort,
     stealthmode: true
 };
 
-console.log('run static server port 8080');
+console.log('run static server port ' + staticPort);
 
 drakov.run(argv, function(){
-  console.log('run mock server port 3000');
+  console.log('run mock server port  ' + mockPort);
 });
 
 
