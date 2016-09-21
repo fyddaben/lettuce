@@ -2,10 +2,10 @@ export STATIC_PORT=3000
 export MOCK_PORT=3002
 
 build_local() {
-  gulp
+ node_modules/gulp/bin/gulp.js
 }
 build_dev() {
-  gulp aglio
+  node_modules/gulp/bin/gulp.js aglio
 }
 
 MODE=${1:-"local"}
