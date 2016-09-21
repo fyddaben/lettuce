@@ -7,22 +7,21 @@ var gulp = require('gulp');
 var aglio = require('gulp-aglio');
 
 var dist_dir = './dist';
-var md_dir = '../share/Cattle/views/*.md';
+var md_dir = '../Cattle/views/*.md';
 
 gulp.task('aglio', function() {
   gulp.src(md_dir)
       .pipe(aglio({
         themeTemplate: './template/index.jade',
-        themeFullWidth: true,
-        themeVariables: 'Streak'
+        themeFullWidth: true
       }))
       .pipe(gulp.dest(dist_dir));
 });
 gulp.task('reMock', function() {
   drakov.stop(function() {
-    console.log('stop mock server port 3000');
+    console.log('stop mock server port ' + mockPort);
     drakov.run(argv, function(){
-      console.log('re run mock server port 3000');
+      console.log('re run mock server port ' + mockPort);
     });
   });
 });
@@ -45,6 +44,7 @@ require('http').createServer(function (request, response) {
 var argv = {
     sourceFiles: md_dir,
     serverPort: mockPort,
+    pubilc: true,
     stealthmode: true
 };
 
