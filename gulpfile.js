@@ -7,7 +7,7 @@ var gulp = require('gulp');
 var aglio = require('gulp-aglio');
 
 var dist_dir = './dist';
-var md_dir = './work/Cattle/views/*.md';
+var md_dir = './work/views/*.md';
 
 gulp.task('aglio', function() {
   gulp.src(md_dir)
