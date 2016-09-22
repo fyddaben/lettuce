@@ -1,0 +1,10 @@
+dev:
+  build: .
+  ports:
+    - "2024:22"
+    - "2025:3000"
+    - "2026:3001"
+  container_name: "CattleApi"
+  volumes:
+    - .:/home/work/
+  command: sh /home/work/run.sh

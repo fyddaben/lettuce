@@ -1,5 +1,6 @@
 var static = require('node-static');
 var drakov = require('drakovNew');
+var combiner = require('stream-combiner2');
 
 // Create a node-static server instance to serve the './public' folder
 
@@ -7,15 +8,21 @@ var gulp = require('gulp');
 var aglio = require('gulp-aglio');
 
 var dist_dir = './dist';
-var md_dir = './work/views/*.md';
+var md_dir = './views/*.md';
 
 gulp.task('aglio', function() {
-  gulp.src(md_dir)
-      .pipe(aglio({
-        themeTemplate: './template/index.jade',
-        themeFullWidth: true
-      }))
-      .pipe(gulp.dest(dist_dir));
+    var combined = combiner.obj([
+        gulp.src(md_dir),
+        aglio({
+          themeTemplate: './template/index.jade',
+          themeFullWidth: true
+        }),
+        gulp.dest(dist_dir)
+    ]);
+    combined.on('error', function(e) {
+
+    });
+    return combined;
 });
 gulp.task('reMock', function() {
   drakov.stop(function() {
@@ -30,7 +37,7 @@ gulp.task('watch', function () {
   gulp.watch(md_dir, ['aglio', 'reMock']);
 });
 
-gulp.task('default', ['aglio','watch']);
+gulp.task('default', ['watch']);
 
 var file = new static.Server('./dist');
 var staticPort = process.env.STATIC_PORT;
@@ -46,16 +53,24 @@ require('http').createServer(function (request, response) {
 var argv = {
     sourceFiles: md_dir,
     serverPort: mockPort,
-    pubilc: true,
-    stealthmode: true
+    stealthmode: true,
+    public: true
 };
 
+var d = require('domain').create();
 
-drakov.run(argv, function(){
-  console.log('run mock server port  ' + mockPort);
+d.on('error', function(err) {
+    console.error('Error caught by domain:', err);
+});
+d.run(function() {
+    drakov.run(argv, function(err){
+        if (err) {
+            throw err;
+        }
+        console.log('run mock server port  ' + mockPort);
+    });
 });
 
-
-
-
-
+process.on('uncaughtException', function(err) {
+    console.error('Error ben event:', err);
+});

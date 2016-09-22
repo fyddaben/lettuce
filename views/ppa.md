@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: http://aaa.com
 
-# API Title daben ss 
+# API Title daben  
 [Markdown](http://daringfireball.net/projects/markdown/syntax) **formatted** description.
 
 ## Subtitle
